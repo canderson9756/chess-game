@@ -5,3 +5,6 @@ class Colour(Enum):
 
     def oposite(self) -> 'Colour':
         return Colour.WHITE if self == Colour.BLACK else Colour.BLACK
+    
+    def direction(self) -> int:
+        return 1 if self == Colour.WHITE else -1
