@@ -10,6 +10,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from src.core.position import Position
     from src.pieces.base.piece import Piece
+    from src.board.board import Board
 
 
 class Move(ABC):
@@ -43,19 +44,19 @@ class Move(ABC):
         self.destination = destination
 
     @abstractmethod
-    def execute(self) -> None:
-        """Execute the move, updating the game state.
+    def execute(self, board: 'Board') -> None:
+        """Apply the move to the board.
 
-        Subclasses must implement this to apply the move's effects
-        to the board and pieces.
+        Args:
+            board: The board to update.
         """
         pass
 
     @abstractmethod
-    def undo(self) -> None:
-        """Undo the move, reverting to the previous state.
+    def undo(self, board: 'Board') -> None:
+        """Reverse the move on the board.
 
-        Subclasses must implement this to reverse the move's effects
-        and restore the previous game state.
+        Args:
+            board: The board to revert.
         """
         pass
