@@ -12,7 +12,7 @@ class PawnStrategy(MoveStrategy):
         forward = piece.position + Direction(0, direction)
         if forward.is_valid() and not board.is_occupied(forward):
             moves.append(forward)
-            if piece.first_move:
+            if piece.first_move: # type: ignore
                 forward = forward + Direction(0, direction)
                 if forward.is_valid() and not board.is_occupied(forward):
                     moves.append(forward)

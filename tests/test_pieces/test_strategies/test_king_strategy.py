@@ -4,7 +4,7 @@ from src.core import *
 from src.board import Board
 
 from typing import Callable, TYPE_CHECKING
-import pytest
+import pytest   # type: ignore
 
 if TYPE_CHECKING:
     from ...conftest import *
