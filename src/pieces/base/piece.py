@@ -17,7 +17,7 @@ class Piece(ABC):
         return self._colour
     
     @abstractmethod
-    def get_legal_moves(self) -> list['Position']:
+    def get_legal_moves(self, board: 'Board') -> list['Position']:
         pass
 
     def move_to(self, position: 'Position') -> None:
