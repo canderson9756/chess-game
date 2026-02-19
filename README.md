@@ -35,11 +35,24 @@ legal_moves = knight.get_legal_moves(board)
 **Command Pattern**: Moves are represented as command objects with `execute()` and `undo()` methods, enabling move history and game state management.
 
 ```python
-from src.moves import StandardMove
+from src.moves import StandardMove, CaptureMove, MoveHistory
 
+# Standard move (no capture)
 move = StandardMove(piece, origin, destination)
-move.execute()  # Apply the move
-move.undo()     # Revert the move
+move.execute(board)  # Apply the move
+move.undo(board)     # Revert the move
+
+# Capture move (removes enemy piece)
+capture = CaptureMove(knight, origin, enemy_position)
+capture.execute(board)  # Captures enemy and moves knight
+capture.undo(board)     # Restores both pieces
+
+# Move history with undo/redo
+history = MoveHistory()
+history.push(move)
+move.execute(board)
+history.undo(board)  # Undo last move
+history.redo(board)  # Redo the move
 ```
 
 ## Modules
@@ -70,6 +83,8 @@ Fundamental chess domain objects:
 
 - **Move**: Abstract base class implementing the Command pattern
 - **StandardMove**: Basic piece relocation from origin to destination
+- **CaptureMove**: Move that captures an enemy piece, storing it for undo
+- **MoveHistory**: Manages move history with undo/redo stack operations
 
 ## Usage
 

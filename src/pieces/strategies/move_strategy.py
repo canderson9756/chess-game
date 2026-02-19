@@ -29,4 +29,3 @@ class MoveStrategy(ABC):
         Returns:
             A list of valid destination positions.
         """
-        pass

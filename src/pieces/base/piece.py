@@ -5,9 +5,9 @@ pieces inherit from.
 """
 
 from abc import ABC, abstractmethod
+from typing import TYPE_CHECKING
 from src.core.colour import Colour
 from src.core.position import Position
-from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from src.board.board import Board
@@ -61,7 +61,6 @@ class Piece(ABC):
         Returns:
             A list of valid destination positions.
         """
-        pass
 
     def move_to(self, position: "Position") -> None:
         """Move the piece to a new position.
@@ -80,7 +79,7 @@ class Piece(ABC):
         Returns:
             True if the colour is different from this piece's colour.
         """
-        return True if colour != self.colour else False
+        return colour != self.colour
 
     def set_position(self, position: "Position") -> None:
         """Set the piece's position directly.

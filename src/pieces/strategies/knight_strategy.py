@@ -3,7 +3,7 @@
 This module provides the KnightStrategy for L-shaped jumping movement.
 """
 
-from .move_strategy import MoveStrategy
+from src.pieces.strategies.move_strategy import MoveStrategy
 from src.core.direction import Direction
 from src.core.position import Position
 from src.pieces.base.piece import Piece
