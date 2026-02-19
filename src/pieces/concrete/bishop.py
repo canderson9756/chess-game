@@ -4,7 +4,7 @@ from src.core.colour import Colour
 from src.pieces.strategies.bishop_strategy import BishopStrategy
 from src.board.board import Board
 
-class Rook(Piece):
+class Bishop(Piece):
     def __init__(self, position: 'Position', colour: 'Colour'):
         super().__init__(position, colour)
         self._strategy = BishopStrategy()
