@@ -41,3 +41,10 @@ class Board:
         if colour is None:
             return self._pieces
         return [p for p in self._pieces if p.colour == colour]
+    
+    def move_piece(self, move_from: 'Position', move_to: 'Position') -> None:
+        piece = self.get_piece_at(move_from)
+        if piece:
+            piece.set_position(move_to)
+        else:
+            raise LookupError("Move from position not found. Look at other logic")

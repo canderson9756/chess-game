@@ -64,4 +64,14 @@ def test_board_get_pieces_by_colour(make_dummy_piece: Callable[['Position', 'Col
     board.add_piece(black_piece)
     assert board.get_pieces(Colour.WHITE) == [white_piece]
     assert board.get_pieces(Colour.BLACK) == [black_piece]
+
+def test_board_move_piece(make_dummy_piece: Callable[['Position', 'Colour'], 'DummyPiece']):
+    board = Board()
+    piece = make_dummy_piece(Position(0, 4), Colour.WHITE)
+    board.add_piece(piece)
+
+    board.move_piece(Position(0, 4), Position(0, 7))
+
+    assert board.get_piece_at(Position(0, 4)) == None
+    assert board.get_piece_at(Position(0, 7)) == piece
     

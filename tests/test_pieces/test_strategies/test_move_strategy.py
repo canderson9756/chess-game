@@ -3,4 +3,4 @@ import pytest
 
 def test_move_strategy_is_abstract():
     with pytest.raises(TypeError):
-        MoveStrategy()
+        MoveStrategy()      # type: ignore[abstract]

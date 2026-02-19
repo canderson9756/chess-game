@@ -1,6 +1,10 @@
 from abc import ABC, abstractmethod
 from src.core.colour import Colour
 from src.core.position import Position
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from src.board.board import Board
 
 class Piece(ABC):
     
@@ -25,3 +29,6 @@ class Piece(ABC):
 
     def is_enemy(self, colour: 'Colour'):
         return True if colour!=self.colour else False
+    
+    def set_position(self, position: 'Position') -> None:
+        self._position = position
