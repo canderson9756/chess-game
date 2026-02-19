@@ -3,7 +3,7 @@ class Colour(Enum):
     WHITE = auto()
     BLACK = auto()
 
-    def oposite(self) -> 'Colour':
+    def opposite(self) -> 'Colour':
         return Colour.WHITE if self == Colour.BLACK else Colour.BLACK
     
     def direction(self) -> int:

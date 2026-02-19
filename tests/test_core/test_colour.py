@@ -4,7 +4,7 @@ def test_colour_has_white_and_black():
     assert Colour.WHITE
     assert Colour.BLACK
 
-def test_colour_has_oposite():
+def test_colour_has_opposite():
     assert Colour.WHITE.oposite() == Colour.BLACK
     assert Colour.BLACK.oposite() == Colour.WHITE
 
