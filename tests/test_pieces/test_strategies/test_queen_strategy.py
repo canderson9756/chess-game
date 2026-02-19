@@ -4,6 +4,7 @@ from src.core import Position
 from src.core import Colour
 from src.pieces import Queen
 
+
 def test_queen_moves_orthogonally_and_diagonally():
     strategy = QueenStrategy()
     queen = Queen(Position(3, 3), Colour.WHITE)
@@ -28,6 +29,7 @@ def test_queen_blocked_by_friendly():
     assert Position(6, 6) not in moves
     assert Position(7, 7) not in moves
     assert Position(2, 2) in moves
+
 
 def test_queen_blocked_by_enemy():
     strategy = QueenStrategy()

@@ -18,8 +18,8 @@ class BishopStrategy(SlidingStrategy):
     def directions(self) -> list[Direction]:
         """Get the four diagonal directions."""
         return [
-            Direction(1, 1),    # Up-right
-            Direction(-1, 1),   # Up-left
+            Direction(1, 1),  # Up-right
+            Direction(-1, 1),  # Up-left
             Direction(-1, -1),  # Down-left
-            Direction(1, -1)    # Down-right
+            Direction(1, -1),  # Down-right
         ]

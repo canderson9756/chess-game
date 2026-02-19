@@ -24,4 +24,13 @@ from .queen_strategy import QueenStrategy
 from .pawn_strategy import PawnStrategy
 from .king_strategy import KingStrategy
 
-__all__ = ['MoveStrategy', 'KnightStrategy', 'SlidingStrategy', 'RookStrategy', 'BishopStrategy', 'QueenStrategy', 'PawnStrategy', 'KingStrategy']
+__all__ = [
+    "MoveStrategy",
+    "KnightStrategy",
+    "SlidingStrategy",
+    "RookStrategy",
+    "BishopStrategy",
+    "QueenStrategy",
+    "PawnStrategy",
+    "KingStrategy",
+]

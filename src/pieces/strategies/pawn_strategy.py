@@ -21,7 +21,7 @@ class PawnStrategy(MoveStrategy):
     - This implementation does not include en passant or promotion.
     """
 
-    def get_legal_moves(self, piece: Piece, board: 'Board') -> list[Position]:
+    def get_legal_moves(self, piece: Piece, board: "Board") -> list[Position]:
         """Calculate all legal moves for a pawn.
 
         Includes forward movement (one or two squares on first move)

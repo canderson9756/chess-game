@@ -4,13 +4,15 @@ from src.core import Position
 from src.core import Colour
 from src.pieces import Rook
 
+
 def test_rook_moves_orthogonally():
     strategy = RookStrategy()
     rook = Rook(Position(3, 3), Colour.WHITE)
 
     moves = strategy.get_legal_moves(rook, board=Board())
-    
+
     assert len(moves) == 14
+
 
 def test_rook_blocked_by_friendly():
     board = Board()

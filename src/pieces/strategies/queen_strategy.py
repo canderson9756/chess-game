@@ -19,13 +19,13 @@ class QueenStrategy(SlidingStrategy):
         """Get all eight directions (cardinal and diagonal)."""
         return [
             # Diagonal directions
-            Direction(1, 1),    # Up-right
-            Direction(-1, 1),   # Up-left
+            Direction(1, 1),  # Up-right
+            Direction(-1, 1),  # Up-left
             Direction(-1, -1),  # Down-left
-            Direction(1, -1),   # Down-right
+            Direction(1, -1),  # Down-right
             # Cardinal directions
-            Direction(1, 0),    # Right
-            Direction(-1, 0),   # Left
-            Direction(0, 1),    # Up
-            Direction(0, -1)    # Down
+            Direction(1, 0),  # Right
+            Direction(-1, 0),  # Left
+            Direction(0, 1),  # Up
+            Direction(0, -1),  # Down
         ]

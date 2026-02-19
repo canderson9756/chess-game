@@ -11,14 +11,14 @@ from .move_strategy import MoveStrategy
 from src.core.direction import Direction
 
 KING_MOVES: list[Direction] = [
-    Direction(0, 1),    # Up
-    Direction(1, 1),    # Up-right
-    Direction(1, 0),    # Right
-    Direction(1, -1),   # Down-right
-    Direction(0, -1),   # Down
+    Direction(0, 1),  # Up
+    Direction(1, 1),  # Up-right
+    Direction(1, 0),  # Right
+    Direction(1, -1),  # Down-right
+    Direction(0, -1),  # Down
     Direction(-1, -1),  # Down-left
-    Direction(-1, 0),   # Left
-    Direction(-1, 1)    # Up-left
+    Direction(-1, 0),  # Left
+    Direction(-1, 1),  # Up-left
 ]
 """All eight directions a king can move (one square each)."""
 
@@ -30,7 +30,7 @@ class KingStrategy(MoveStrategy):
     does not currently implement castling or check detection.
     """
 
-    def get_legal_moves(self, piece: Piece, board: 'Board') -> list[Position]:
+    def get_legal_moves(self, piece: Piece, board: "Board") -> list[Position]:
         """Calculate all legal single-square moves for the king.
 
         Args:

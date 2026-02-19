@@ -18,7 +18,7 @@ class Colour(Enum):
     WHITE = auto()
     BLACK = auto()
 
-    def opposite(self) -> 'Colour':
+    def opposite(self) -> "Colour":
         """Return the opposing colour.
 
         Returns:

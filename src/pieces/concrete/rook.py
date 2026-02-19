@@ -18,7 +18,7 @@ class Rook(Piece):
     They cannot jump over other pieces.
     """
 
-    def __init__(self, position: 'Position', colour: 'Colour'):
+    def __init__(self, position: "Position", colour: "Colour"):
         """Initialize a rook at the given position.
 
         Args:
@@ -28,7 +28,7 @@ class Rook(Piece):
         super().__init__(position, colour)
         self._strategy = RookStrategy()
 
-    def get_legal_moves(self, board: 'Board') -> list[Position]:
+    def get_legal_moves(self, board: "Board") -> list[Position]:
         """Get all legal moves for this rook.
 
         Args:

@@ -52,7 +52,7 @@ class Position:
         return FILE_TO_LETTER[self.file] + str(self.rank + 1)
 
     @classmethod
-    def from_algebraic(cls, notation: str) -> 'Position':
+    def from_algebraic(cls, notation: str) -> "Position":
         """Create a Position from algebraic notation.
 
         Args:
@@ -63,7 +63,7 @@ class Position:
         """
         return cls(LETTER_TO_FILE[notation[0]], int(notation[1]) - 1)
 
-    def __add__(self, direction: 'Direction') -> 'Position':
+    def __add__(self, direction: "Direction") -> "Position":
         """Add a direction to get a new position.
 
         Args:

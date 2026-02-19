@@ -18,7 +18,7 @@ class Bishop(Piece):
     over other pieces.
     """
 
-    def __init__(self, position: 'Position', colour: 'Colour'):
+    def __init__(self, position: "Position", colour: "Colour"):
         """Initialize a bishop at the given position.
 
         Args:
@@ -28,7 +28,7 @@ class Bishop(Piece):
         super().__init__(position, colour)
         self._strategy = BishopStrategy()
 
-    def get_legal_moves(self, board: 'Board') -> list[Position]:
+    def get_legal_moves(self, board: "Board") -> list[Position]:
         """Get all legal moves for this bishop.
 
         Args:

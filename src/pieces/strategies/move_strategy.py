@@ -19,7 +19,7 @@ class MoveStrategy(ABC):
     """
 
     @abstractmethod
-    def get_legal_moves(self, piece: 'Piece', board: 'Board') -> list['Position']:
+    def get_legal_moves(self, piece: "Piece", board: "Board") -> list["Position"]:
         """Calculate all legal moves for a piece.
 
         Args:

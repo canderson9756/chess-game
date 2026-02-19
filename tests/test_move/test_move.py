@@ -6,7 +6,10 @@ import pytest
 if TYPE_CHECKING:
     from ..conftest import *
 
-def test_move_is_abstract(make_dummy_piece: Callable[['Position', 'Colour'], 'DummyPiece']):
+
+def test_move_is_abstract(
+    make_dummy_piece: Callable[["Position", "Colour"], "DummyPiece"]
+):
     with pytest.raises(TypeError):
         origin = Position(0, 0)
-        Move(make_dummy_piece(origin, Colour.WHITE), origin, Position(3, 3))    # type: ignore[abstract]
+        Move(make_dummy_piece(origin, Colour.WHITE), origin, Position(3, 3))  # type: ignore[abstract]

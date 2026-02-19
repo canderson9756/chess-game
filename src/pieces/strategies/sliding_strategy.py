@@ -25,7 +25,7 @@ class SlidingStrategy(MoveStrategy):
 
     @property
     @abstractmethod
-    def directions(self) -> list['Direction']:
+    def directions(self) -> list["Direction"]:
         """Get the directions this piece can move.
 
         Returns:
@@ -33,7 +33,7 @@ class SlidingStrategy(MoveStrategy):
         """
         pass
 
-    def get_legal_moves(self, piece: 'Piece', board: 'Board') -> list['Position']:
+    def get_legal_moves(self, piece: "Piece", board: "Board") -> list["Position"]:
         """Calculate all legal moves by extending in each direction.
 
         Args:
@@ -43,12 +43,14 @@ class SlidingStrategy(MoveStrategy):
         Returns:
             A list of valid destination positions.
         """
-        moves: list['Position'] = []
+        moves: list["Position"] = []
         for direction in self.directions:
             moves.extend(self._get_moves_in_direction(piece, board, direction))
         return moves
 
-    def _get_moves_in_direction(self, piece: 'Piece', board: 'Board | None', direction: 'Direction') -> list['Position']:
+    def _get_moves_in_direction(
+        self, piece: "Piece", board: "Board | None", direction: "Direction"
+    ) -> list["Position"]:
         """Get all moves in a single direction.
 
         Extends from the piece's position in the given direction until
@@ -62,7 +64,7 @@ class SlidingStrategy(MoveStrategy):
         Returns:
             A list of valid positions in this direction.
         """
-        moves: list['Position'] = []
+        moves: list["Position"] = []
         current = piece.position + direction
         while current.is_valid():
             if board is None:

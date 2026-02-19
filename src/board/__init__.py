@@ -6,4 +6,4 @@ querying board state, and executing piece movements.
 
 from .board import Board
 
-__all__ = ['Board']
+__all__ = ["Board"]

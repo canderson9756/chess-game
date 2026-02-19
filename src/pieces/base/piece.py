@@ -31,7 +31,7 @@ class Piece(ABC):
         ...         pass
     """
 
-    def __init__(self, position: 'Position', colour: 'Colour'):
+    def __init__(self, position: "Position", colour: "Colour"):
         """Initialize a piece with position and colour.
 
         Args:
@@ -42,17 +42,17 @@ class Piece(ABC):
         self._colour = colour
 
     @property
-    def position(self) -> 'Position':
+    def position(self) -> "Position":
         """Get the current position of the piece."""
         return self._position
 
     @property
-    def colour(self) -> 'Colour':
+    def colour(self) -> "Colour":
         """Get the colour of the piece."""
         return self._colour
 
     @abstractmethod
-    def get_legal_moves(self, board: 'Board') -> list['Position']:
+    def get_legal_moves(self, board: "Board") -> list["Position"]:
         """Calculate all legal moves for this piece.
 
         Args:
@@ -63,7 +63,7 @@ class Piece(ABC):
         """
         pass
 
-    def move_to(self, position: 'Position') -> None:
+    def move_to(self, position: "Position") -> None:
         """Move the piece to a new position.
 
         Args:
@@ -71,7 +71,7 @@ class Piece(ABC):
         """
         self._position = position
 
-    def is_enemy(self, colour: 'Colour') -> bool:
+    def is_enemy(self, colour: "Colour") -> bool:
         """Check if a colour represents an enemy piece.
 
         Args:
@@ -82,7 +82,7 @@ class Piece(ABC):
         """
         return True if colour != self.colour else False
 
-    def set_position(self, position: 'Position') -> None:
+    def set_position(self, position: "Position") -> None:
         """Set the piece's position directly.
 
         Args:

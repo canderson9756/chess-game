@@ -23,7 +23,7 @@ class Pawn(Piece):
             two-square advance option.
     """
 
-    def __init__(self, position: 'Position', colour: 'Colour'):
+    def __init__(self, position: "Position", colour: "Colour"):
         """Initialize a pawn at the given position.
 
         Args:
@@ -34,7 +34,7 @@ class Pawn(Piece):
         self._strategy = PawnStrategy()
         self.first_move = True
 
-    def get_legal_moves(self, board: 'Board') -> list[Position]:
+    def get_legal_moves(self, board: "Board") -> list[Position]:
         """Get all legal moves for this pawn.
 
         Args:

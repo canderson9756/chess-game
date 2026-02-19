@@ -13,5 +13,6 @@ Classes:
 from .move import Move
 from .standard_move import StandardMove
 from .capture_move import CaptureMove
+from .move_history import MoveHistory
 
-__all__ = ['Move', 'StandardMove', 'CaptureMove']
+__all__ = ["Move", "StandardMove", "CaptureMove", "MoveHistory"]

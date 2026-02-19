@@ -22,7 +22,7 @@ class StandardMove(Move):
         >>> move.undo(board)     # Returns the pawn to its original position
     """
 
-    def execute(self, board: 'Board') -> None:
+    def execute(self, board: "Board") -> None:
         """Move the piece from origin to destination on the board.
 
         Args:
@@ -30,7 +30,7 @@ class StandardMove(Move):
         """
         board.move_piece(self.origin, self.destination)
 
-    def undo(self, board: 'Board') -> None:
+    def undo(self, board: "Board") -> None:
         """Reverse the move by returning the piece from destination to origin.
 
         Args:

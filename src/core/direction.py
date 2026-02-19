@@ -27,7 +27,7 @@ class Direction:
     dx: int
     dy: int
 
-    def is_parallel(self, direction: 'Direction') -> bool:
+    def is_parallel(self, direction: "Direction") -> bool:
         """Check if this direction is parallel to another.
 
         Two directions are parallel if they lie on the same vertical,
@@ -45,13 +45,13 @@ class Direction:
         elif (self.dx != direction.dx) and (self.dy == direction.dy):
             # On the same horizontal line
             return True
-        elif (self.dx - direction.dx == self.dy - direction.dy):
+        elif self.dx - direction.dx == self.dy - direction.dy:
             # On same diagonal line
             return True
         else:
             return False
 
-    def __mul__(self, scalar: int) -> 'Direction':
+    def __mul__(self, scalar: int) -> "Direction":
         """Multiply the direction by a scalar value.
 
         Args:

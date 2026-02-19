@@ -19,7 +19,7 @@ class King(Piece):
     when a king is checkmated.
     """
 
-    def __init__(self, position: 'Position', colour: 'Colour'):
+    def __init__(self, position: "Position", colour: "Colour"):
         """Initialize a king at the given position.
 
         Args:
@@ -29,7 +29,7 @@ class King(Piece):
         super().__init__(position, colour)
         self._strategy = KingStrategy()
 
-    def get_legal_moves(self, board: 'Board') -> list[Position]:
+    def get_legal_moves(self, board: "Board") -> list[Position]:
         """Get all legal moves for this king.
 
         Args:

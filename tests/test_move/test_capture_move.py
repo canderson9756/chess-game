@@ -9,12 +9,15 @@ from src.moves import CaptureMove
 from src.board import Board
 from src.core import Position, Colour
 from typing import TYPE_CHECKING, Callable
-import pytest
+import pytest  # type: ignore
 
 if TYPE_CHECKING:
     from ..conftest import *
 
-def test_capture_move_makes_move(make_dummy_piece: Callable[['Position', 'Colour'], 'DummyPiece']):
+
+def test_capture_move_makes_move(
+    make_dummy_piece: Callable[["Position", "Colour"], "DummyPiece"]
+):
     origin = Position(0, 0)
     destination = Position(0, 4)
     board = Board()
@@ -34,7 +37,10 @@ def test_capture_move_makes_move(make_dummy_piece: Callable[['Position', 'Colour
     assert board.get_piece_at(destination) == piece
     assert enemy not in board.get_pieces()
 
-def test_capture_move_undos_move(make_dummy_piece: Callable[['Position', 'Colour'], 'DummyPiece']):
+
+def test_capture_move_undos_move(
+    make_dummy_piece: Callable[["Position", "Colour"], "DummyPiece"]
+):
     origin = Position(0, 0)
     destination = Position(0, 4)
     board = Board()
@@ -54,4 +60,3 @@ def test_capture_move_undos_move(make_dummy_piece: Callable[['Position', 'Colour
     assert board.get_piece_at(origin) == piece
     assert board.get_piece_at(destination) == enemy
     assert enemy in board.get_pieces()
-

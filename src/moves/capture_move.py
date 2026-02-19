@@ -24,11 +24,11 @@ class CaptureMove(Move):
         >>> move.undo(board)     # Returns knight to (2, 1) and restores captured piece
     """
 
-    def __init__(self, piece: 'Piece', origin: 'Position', destination: 'Position'):
+    def __init__(self, piece: "Piece", origin: "Position", destination: "Position"):
         super().__init__(piece, origin, destination)
-        self._captured_piece: 'Piece'
+        self._captured_piece: "Piece"
 
-    def execute(self, board: 'Board') -> None:
+    def execute(self, board: "Board") -> None:
         """Capture the enemy piece at the destination and move the piece there.
 
         Stores the captured piece, removes it from the board, then moves
@@ -37,11 +37,11 @@ class CaptureMove(Move):
         Args:
             board: The board to update.
         """
-        self._captured_piece = board.get_piece_at(self.destination)
+        self._captured_piece = board.get_piece_at(self.destination)  # type: ignore
         board.remove_piece(self.destination)
         board.move_piece(self.origin, self.destination)
 
-    def undo(self, board: 'Board') -> None:
+    def undo(self, board: "Board") -> None:
         """Reverse the capture by returning both pieces to their original positions.
 
         Moves the attacking piece back to origin and restores the captured

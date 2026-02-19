@@ -31,7 +31,7 @@ class Move(ABC):
         >>> move.undo()     # Revert to previous state
     """
 
-    def __init__(self, piece: 'Piece', origin: 'Position', destination: 'Position'):
+    def __init__(self, piece: "Piece", origin: "Position", destination: "Position"):
         """Initialize a move with piece and positions.
 
         Args:
@@ -44,7 +44,7 @@ class Move(ABC):
         self.destination = destination
 
     @abstractmethod
-    def execute(self, board: 'Board') -> None:
+    def execute(self, board: "Board") -> None:
         """Apply the move to the board.
 
         Args:
@@ -53,7 +53,7 @@ class Move(ABC):
         pass
 
     @abstractmethod
-    def undo(self, board: 'Board') -> None:
+    def undo(self, board: "Board") -> None:
         """Reverse the move on the board.
 
         Args:
