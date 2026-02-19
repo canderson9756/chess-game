@@ -7,9 +7,11 @@ tracking and game state management.
 Classes:
     Move: Abstract base class for all move types.
     StandardMove: Basic piece relocation from origin to destination.
+    CaptureMove: Move that removes an enemy piece before relocating the attacker.
 """
 
 from .move import Move
 from .standard_move import StandardMove
+from .capture_move import CaptureMove
 
-__all__ = ['Move', 'StandardMove']
+__all__ = ['Move', 'StandardMove', 'CaptureMove']

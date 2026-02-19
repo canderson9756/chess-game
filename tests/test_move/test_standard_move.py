@@ -7,7 +7,7 @@ verifying that standard chess moves execute and undo correctly.
 from src.moves import StandardMove
 
 from typing import TYPE_CHECKING, Callable
-import pytest
+import pytest   # type: ignore
 from src.core import *
 from src.board import Board
 
