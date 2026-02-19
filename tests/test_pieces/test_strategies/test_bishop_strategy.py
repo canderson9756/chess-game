@@ -3,7 +3,7 @@ from src.pieces import Bishop
 from src.core import *
 from src.board import Board
 
-def test_bishop_moves_orthogonally():
+def test_bishop_moves_diagonally():
     strategy = BishopStrategy()
     bishop = Bishop(Position(3, 3), Colour.WHITE)
 

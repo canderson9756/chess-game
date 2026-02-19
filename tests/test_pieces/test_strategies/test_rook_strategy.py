@@ -9,9 +9,7 @@ def test_rook_moves_orthogonally():
     rook = Rook(Position(3, 3), Colour.WHITE)
 
     moves = strategy.get_legal_moves(rook, board=Board())
-
-    # Should have moves in 4 directions (up, down, left, right)
-    # From (3,3): 3 left, 4 right, 3 down, 4 up = 14 moves
+    
     assert len(moves) == 14
 
 def test_rook_blocked_by_friendly():
