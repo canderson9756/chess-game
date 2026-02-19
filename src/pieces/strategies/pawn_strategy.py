@@ -12,4 +12,15 @@ class PawnStrategy(MoveStrategy):
         forward = piece.position + Direction(0, direction)
         if forward.is_valid() and not board.is_occupied(forward):
             moves.append(forward)
+            if piece.first_move:
+                forward = forward + Direction(0, direction)
+                if forward.is_valid() and not board.is_occupied(forward):
+                    moves.append(forward)
+        
+        dx = [-1, 1]    # Movements for capturing
+        for capture_direction in dx:
+            diagonal = piece.position + Direction(capture_direction, direction)
+            if diagonal.is_valid() and board.has_enemy_piece(diagonal, piece.colour):
+                moves.append(diagonal)
+
         return moves

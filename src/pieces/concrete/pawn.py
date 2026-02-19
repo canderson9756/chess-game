@@ -8,6 +8,7 @@ class Pawn(Piece):
     def __init__(self, position: 'Position', colour: 'Colour'):
         super().__init__(position, colour)
         self._strategy = PawnStrategy()
+        self.first_move = True
 
     def get_legal_moves(self, board: 'Board') -> list[Position]:
         return self._strategy.get_legal_moves(self, board)
