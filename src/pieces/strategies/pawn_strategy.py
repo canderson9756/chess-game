@@ -5,7 +5,7 @@ from .move_strategy import MoveStrategy
 from src.core.direction import Direction
 
 class PawnStrategy(MoveStrategy):
-    def get_legal_moves(self, piece: Piece, board: Board) -> list[Position]:
+    def get_legal_moves(self, piece: Piece, board: 'Board') -> list[Position]:
         moves: list[Position] = []
         direction = piece.colour.direction()
 

@@ -16,7 +16,7 @@ KING_MOVES = [
 ]
 
 class KingStrategy(MoveStrategy):
-    def get_legal_moves(self, piece: Piece, board: Board) -> list[Position]:
+    def get_legal_moves(self, piece: Piece, board: 'Board') -> list[Position]:
         moves: list[Position] = []
         for move in KING_MOVES:
             target = piece.position + move

@@ -1,7 +1,9 @@
-from src.pieces.base.piece import Piece
 from src.core.position import Position
 from src.core.colour import Colour
+from typing import TYPE_CHECKING
 
+if TYPE_CHECKING:
+    from src.pieces.base.piece import Piece
 class Board:
     def __init__(self):
         self._pieces: list['Piece'] = []
@@ -13,7 +15,7 @@ class Board:
     def add_piece(self, piece: 'Piece') -> None:
         self._pieces.append(piece)
 
-    def get_piece_at(self, position: 'Position') -> Piece | None:
+    def get_piece_at(self, position: 'Position') -> 'Piece | None':
         for piece in self._pieces:
             if piece.position == position:
                 return piece
@@ -35,7 +37,7 @@ class Board:
             return True if piece.colour != colour else False
         return False
 
-    def get_pieces(self, colour: Colour | None = None) -> list['Piece']:
+    def get_pieces(self, colour: 'Colour | None' = None) -> list['Piece']:
         if colour is None:
             return self._pieces
         return [p for p in self._pieces if p.colour == colour]

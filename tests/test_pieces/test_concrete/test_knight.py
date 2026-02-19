@@ -1,6 +1,7 @@
 from src.pieces import Knight
 from src.core import Position
 from src.core import Colour
+from src.board import Board
 
 def test_knight_is_piece():
     knight = Knight(Position(0,0), Colour.WHITE)
@@ -10,7 +11,7 @@ def test_knight_is_piece():
 def test_knight_delegates_to_strategy():
     knight = Knight(Position(3, 3), Colour.WHITE)
 
-    moves = knight.get_legal_moves(board=None)
+    moves = knight.get_legal_moves(board=Board())
 
     expected = [
         Position(1, 2), Position(1, 4),

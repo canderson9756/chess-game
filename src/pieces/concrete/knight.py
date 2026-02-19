@@ -2,6 +2,7 @@ from src.core.position import Position
 from src.pieces.base.piece import Piece
 from src.core.colour import Colour
 from src.pieces.strategies.knight_strategy import KnightStrategy
+from src.board.board import Board
 
 class Knight(Piece):
     def __init__(self, position: 'Position', colour: 'Colour'):
