@@ -48,3 +48,10 @@ class Board:
             piece.set_position(move_to)
         else:
             raise LookupError("Move from position not found. Look at other logic")
+        
+    def remove_piece(self, remove_position: 'Position') -> None:
+        piece = self.get_piece_at(remove_position)
+        if piece:
+            self._pieces.remove(piece)
+        else:
+            raise TypeError(f"No piece at the given location: {remove_position}")
