@@ -2,7 +2,8 @@ from src.moves import MoveHistory, StandardMove
 from src.core import Colour, Position
 from src.board import Board
 
-import pytest
+import pytest   # type: ignore
+
 from typing import TYPE_CHECKING, Callable
 
 if TYPE_CHECKING:
