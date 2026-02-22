@@ -48,6 +48,11 @@ class Game:
 
     def undo(self) -> None:
         self._move_history.undo(self._board)
+        self._change_player_turn()
+
+    def redo(self) -> None:
+        self._move_history.redo(self._board)
+        self._change_player_turn()
 
     @property
     def board(self) -> 'Board':
