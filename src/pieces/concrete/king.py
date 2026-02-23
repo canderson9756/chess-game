@@ -42,3 +42,7 @@ class King(Piece):
     
     def get_attack_moves(self, board: 'Board') -> list[Position]:
         return self._strategy.get_attack_moves(self, board)
+    
+    @property
+    def is_king(self) -> 'bool':
+        return True

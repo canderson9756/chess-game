@@ -5,6 +5,7 @@ from src.moves.move import Move
 from src.moves.standard_move import StandardMove
 from src.moves.capture_move import CaptureMove
 from src.moves.move_history import MoveHistory
+from src.validator.validator import Validator
 
 from typing import TYPE_CHECKING
 
@@ -13,18 +14,17 @@ if TYPE_CHECKING:
 
 
 class Game:
-    def __init__(self):
+    def __init__(self, validator: 'Validator | None' = None):
         self._board = Board()
         self._player_turn = Colour.WHITE
         self._move_history = MoveHistory()
+        self._validator = validator
 
     def make_move(self, origin: 'Position', destination: 'Position') -> bool:
         piece = self._board.get_piece_at(origin)
         if piece is None:
-            print(1)
             return False
         if piece.colour != self._player_turn:
-            print(2)
             return False
         legal_moves = piece.get_legal_moves(self._board)
         if destination not in legal_moves:
@@ -32,9 +32,11 @@ class Game:
         
         move = self._create_move(piece, origin, destination)
 
+        if self._validator and not self._validator.validate(move, self._board):
+            return False
+
         move.execute(self._board)
         self._move_history.push(move)
-        
         self._change_player_turn()
         return True
     

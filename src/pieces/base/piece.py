@@ -99,3 +99,7 @@ class Piece(ABC):
             position: The new position for the piece.
         """
         self._position = position
+    
+    @property
+    def is_king(self) -> 'bool':
+        return False    # Overriden by king piece

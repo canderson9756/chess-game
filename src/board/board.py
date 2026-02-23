@@ -157,3 +157,9 @@ class Board:
             if position in attacks:
                 return True
         return False
+
+    def find_king(self, colour: 'Colour') -> 'Piece':
+        for piece in self._pieces:
+            if piece.is_king and piece.colour == colour:
+                return piece
+        raise ValueError(f"No {colour} king found")

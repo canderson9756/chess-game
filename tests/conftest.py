@@ -1,6 +1,8 @@
-from src.pieces import Piece
 from src.core import Position, Colour
+from src.pieces import Piece, King
 from src.board import Board
+from src.game import Game
+from src.validator import CheckValidator
 import pytest
 from typing import Callable
 
@@ -31,3 +33,18 @@ def all_positions() -> list[Position]:
 def position(request: pytest.FixtureRequest) -> Position:
     """Parametrized fixture — runs the test once for every square on the board."""
     return request.param
+
+@pytest.fixture
+def game_with_kings():
+    game = Game()
+    game.board.add_piece(King(Position(4, 0), Colour.WHITE))
+    game.board.add_piece(King(Position(4, 7), Colour.BLACK))
+    return game
+
+@pytest.fixture
+def game_with_validation():
+    """Integration test fixture - full validation with kings"""
+    game = Game(validator=CheckValidator())
+    game.board.add_piece(King(Position(4, 0), Colour.WHITE))
+    game.board.add_piece(King(Position(4, 7), Colour.BLACK))
+    return game

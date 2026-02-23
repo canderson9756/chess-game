@@ -1,6 +1,6 @@
 from src.board import Board
-from src.core.position import Position
-from src.core.colour import Colour
+from src.core import Position, Colour
+from src.pieces import King
 
 import pytest  # type: ignore
 from typing import Callable, TYPE_CHECKING
@@ -116,3 +116,12 @@ def test_board_is_quare_attacked(make_dummy_piece: Callable[["Position", "Colour
     board.add_piece(piece)
 
     assert board.is_square_attacked(Position(4, 4), piece.colour) == True
+
+def test_board_find_king():
+    board = Board()
+    king = King(Position(0, 4), Colour.WHITE)   # King on starting square
+
+    board.add_piece(king)
+
+    assert board.find_king(king.colour) == king
+

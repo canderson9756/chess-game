@@ -1,6 +1,6 @@
 from src.validator import CheckValidator
 from src.core import Position, Colour
-from src.moves import Move, StandardMove
+from src.moves import StandardMove
 from src.board import Board
 from src.pieces import King, Rook, Knight
 
@@ -28,16 +28,6 @@ def test_move_that_leaves_king_in_check_is_invalid(make_dummy_piece: Callable[["
     result = validator.validate(move, board)
 
     assert result == False
-
-def test_check_validator_find_king():
-    board = Board()
-    king = King(Position(0, 4), Colour.WHITE)   # King on starting square
-
-    board.add_piece(king)
-
-    validator = CheckValidator()
-
-    assert validator._find_king(board, king.colour) == king # type: ignore
 
 def test_move_that_escapes_check_is_valid():
     board = Board()

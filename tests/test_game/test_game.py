@@ -2,7 +2,7 @@ from src import Game
 from src.board import Board
 from src.core import Colour, Position
 from src.moves import MoveHistory
-from src.pieces import Queen    # Using the queen as a test piece as it has the most flexibility
+from src.pieces import Queen, King, Rook, Knight    # Using the queen as a test piece as it has the most flexibility
 
 import pytest
 from typing import TYPE_CHECKING, Callable
@@ -110,3 +110,16 @@ def test_game_redo(make_dummy_piece: Callable[["Position", "Colour"], "DummyPiec
 
     assert piece.position == Position(2, 2)
     assert game.player_turn == Colour.BLACK
+
+def test_game_rejects_move_that_leaves_king_in_check(game_with_validation: 'Game'):
+    game = game_with_validation
+    rook = Rook(Position(4, 7), Colour.BLACK)  # Attacks king's file
+    blocker = Knight(Position(4, 1), Colour.WHITE)  # Blocking
+    game.board.add_piece(rook)
+    game.board.add_piece(blocker)
+
+    # Try to move blocker away (would expose king)
+    result = game.make_move(Position(4, 1), Position(2, 2))
+
+    assert result == False
+    assert blocker.position == Position(4, 1)  # Didn't move
