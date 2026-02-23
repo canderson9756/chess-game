@@ -48,3 +48,11 @@ def game_with_validation():
     game.board.add_piece(King(Position(4, 0), Colour.WHITE))
     game.board.add_piece(King(Position(4, 7), Colour.BLACK))
     return game
+
+@pytest.fixture
+def board_with_kings():
+    """Board with both kings for integration tests"""
+    board = Board()
+    board.add_piece(King(Position(4, 0), Colour.WHITE))
+    board.add_piece(King(Position(4, 7), Colour.BLACK))
+    return board

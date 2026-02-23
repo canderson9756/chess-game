@@ -13,7 +13,7 @@ def test_position_is_immutable():
     p = Position(0, 0)
     with pytest.raises(AttributeError):
         # Attempt reasignment
-        p.file = 5
+        p.file = 5  # type: ignore
 
 
 def test_position_equality_by_value():
@@ -25,7 +25,7 @@ def test_position_equality_by_value():
     "file,rank,expected",
     [(0, 0, True), (7, 7, True), (-1, 0, False), (8, 0, False), (0, 8, False)],
 )
-def test_position_is_valid(file, rank, expected):
+def test_position_is_valid(file: int, rank: int, expected: bool):
     assert Position(file, rank).is_valid() == expected
 
 
@@ -52,7 +52,7 @@ def test_position_add_direction_can_go_off_board():
 @pytest.mark.parametrize(
     "file,rank,expected", [(0, 0, "a1"), (7, 7, "h8"), (5, 5, "f6"), (3, 2, "d3")]
 )
-def test_to_algebraic(file, rank, expected):
+def test_to_algebraic(file: int, rank: int, expected: bool):
     assert Position(file, rank).to_algebraic() == expected
 
 
@@ -65,5 +65,5 @@ def test_to_algebraic(file, rank, expected):
         ("d3", Position(3, 2)),
     ],
 )
-def test_from_algebraic(notation, expected):
+def test_from_algebraic(notation: str, expected: 'Position'):
     assert Position.from_algebraic(notation) == expected

@@ -4,7 +4,7 @@ from src.moves import StandardMove
 from src.board import Board
 from src.pieces import King, Rook, Knight
 
-import pytest
+import pytest   # type: ignore
 from typing import TYPE_CHECKING, Callable
 
 if TYPE_CHECKING:

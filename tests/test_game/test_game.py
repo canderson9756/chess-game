@@ -2,9 +2,8 @@ from src import Game
 from src.board import Board
 from src.core import Colour, Position
 from src.moves import MoveHistory
-from src.pieces import Queen, King, Rook, Knight    # Using the queen as a test piece as it has the most flexibility
+from src.pieces import Queen, Rook, Knight    # Using the queen as a test piece as it has the most flexibility
 
-import pytest
 from typing import TYPE_CHECKING, Callable
 
 if TYPE_CHECKING:
