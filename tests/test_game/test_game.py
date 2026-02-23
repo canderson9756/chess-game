@@ -55,50 +55,47 @@ def test_game_not_has_legal_moves(game_with_validation: 'Game'):
 
     assert not game_with_validation.has_legal_moves(Colour.WHITE)
 
-def test_game_make_move(make_dummy_piece: Callable[["Position", "Colour"], "DummyPiece"]):
+def test_game_make_move(game_with_kings: 'Game', make_dummy_piece: Callable[["Position", "Colour"], "DummyPiece"]):
     origin, destination = Position(0,0), Position(1, 5)
     piece = make_dummy_piece(origin, Colour.WHITE)
-    game = Game()
-    game.board.add_piece(piece)
-    result = game.make_move(origin, destination)
+
+    game_with_kings.board.add_piece(piece)
+    result = game_with_kings.make_move(origin, destination)
     assert result == True
     assert piece.position == destination
 
-def test_game_changes_player_turn(make_dummy_piece: Callable[["Position", "Colour"], "DummyPiece"]):
+def test_game_changes_player_turn(game_with_kings: 'Game',make_dummy_piece: Callable[["Position", "Colour"], "DummyPiece"]):
     origin, destination = Position(0,0), Position(1, 5)
     piece = make_dummy_piece(origin, Colour.WHITE)
-    game = Game()
-    game.board.add_piece(piece)
-    game.make_move(origin, destination)
-    assert game.player_turn == Colour.BLACK
+    game_with_kings.board.add_piece(piece)
+    game_with_kings.make_move(origin, destination)
+    assert game_with_kings.player_turn == Colour.BLACK
 
-def test_game_make_move_can_be_undone(make_dummy_piece: Callable[["Position", "Colour"], "DummyPiece"]):
-    game = Game()
+def test_game_make_move_can_be_undone(game_with_kings: 'Game', make_dummy_piece: Callable[["Position", "Colour"], "DummyPiece"]):
     piece = make_dummy_piece(Position(1, 0), Colour.WHITE)
-    game.board.add_piece(piece)
+    game_with_kings.board.add_piece(piece)
 
-    game.make_move(Position(1, 0), Position(2, 2))
+    game_with_kings.make_move(Position(1, 0), Position(2, 2))
 
-    assert game.player_turn == Colour.BLACK
+    assert game_with_kings.player_turn == Colour.BLACK
 
     # This only works if a Move was pushed to history
-    game.undo()
+    game_with_kings.undo()
 
     assert piece.position == Position(1, 0)  # Back to original
-    assert game.player_turn == Colour.WHITE     # Bak to original player
+    assert game_with_kings.player_turn == Colour.WHITE     # Bak to original player
 
-def test_game_make_capture_move():
-    game = Game()
+def test_game_make_capture_move(game_with_kings: 'Game'):
     piece = Queen(Position(0, 3), Colour.WHITE)
     enemy = Queen(Position(3, 3), Colour.BLACK)
-    game.board.add_piece(piece)
-    game.board.add_piece(enemy)
+    game_with_kings.board.add_piece(piece)
+    game_with_kings.board.add_piece(enemy)
 
-    result = game.make_move(Position(0, 3), Position(3, 3))
+    result = game_with_kings.make_move(Position(0, 3), Position(3, 3))
 
     assert result == True
     assert piece.position == Position(3,3)
-    assert enemy not in game.board.get_pieces()
+    assert enemy not in game_with_kings.board.get_pieces()
 
 def test_game_cannot_move_wrong_colour(make_dummy_piece: Callable[["Position", "Colour"], "DummyPiece"]):
     game = Game()
@@ -120,26 +117,24 @@ def test_game_rejects_illegal_move():
     assert result == False
     assert piece.position == Position(0, 3)
 
-def test_game_redo(make_dummy_piece: Callable[["Position", "Colour"], "DummyPiece"]):
-
-    game = Game()
+def test_game_redo(game_with_kings: 'Game', make_dummy_piece: Callable[["Position", "Colour"], "DummyPiece"]):
     piece = make_dummy_piece(Position(1, 0), Colour.WHITE)
-    game.board.add_piece(piece)
+    game_with_kings.board.add_piece(piece)
 
-    game.make_move(Position(1, 0), Position(2, 2))
+    game_with_kings.make_move(Position(1, 0), Position(2, 2))
 
-    assert game.player_turn == Colour.BLACK
+    assert game_with_kings.player_turn == Colour.BLACK
 
     # This only works if a Move was pushed to history
-    game.undo()
+    game_with_kings.undo()
 
     assert piece.position == Position(1, 0)  # Back to original
-    assert game.player_turn == Colour.WHITE     # Bak to original player
+    assert game_with_kings.player_turn == Colour.WHITE     # Bak to original player
 
-    game.redo()
+    game_with_kings.redo()
 
     assert piece.position == Position(2, 2)
-    assert game.player_turn == Colour.BLACK
+    assert game_with_kings.player_turn == Colour.BLACK
 
 def test_game_rejects_move_that_leaves_king_in_check(game_with_validation: 'Game'):
     game = game_with_validation
