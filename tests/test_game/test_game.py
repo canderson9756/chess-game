@@ -3,6 +3,7 @@ from src.board import Board
 from src.core import Colour, Position
 from src.moves import MoveHistory
 from src.pieces import Queen, Rook, Knight    # Using the queen as a test piece as it has the most flexibility
+from src.game.state import PlayingState
 
 from typing import TYPE_CHECKING, Callable
 
@@ -23,6 +24,36 @@ def test_game_has_move_history():
     game = Game()
     assert isinstance(game.move_history, MoveHistory)
     assert not game.move_history.can_undo()
+
+def test_game_starts_in_playing_state():
+    game = Game()
+    assert isinstance(game.state, PlayingState)
+
+def test_game_is_in_check(game_with_validation: 'Game'):
+    rook = Rook(Position(4, 3), Colour.BLACK)
+    game_with_validation.board.add_piece(rook)
+    assert game_with_validation.is_in_check(Colour.WHITE)
+
+def test_game_not_in_check(game_with_validation: 'Game'):
+    rook = Rook(Position(5, 3), Colour.BLACK)
+    game_with_validation.board.add_piece(rook)
+    assert not game_with_validation.is_in_check(Colour.WHITE)
+
+def test_game_has_legal_moves(game_with_validation: 'Game'):
+    rook = Rook(Position(5, 3), Colour.BLACK)
+    game_with_validation.board.add_piece(rook)
+    assert game_with_validation.has_legal_moves(Colour.WHITE)
+    assert game_with_validation.has_legal_moves(Colour.BLACK)
+
+def test_game_not_has_legal_moves(game_with_validation: 'Game'):
+    # Set up rooks to put king in stalemate
+    rook1 = Rook(Position(5, 1), Colour.BLACK)
+    rook2 = Rook(Position(3, 1), Colour.BLACK)
+
+    game_with_validation.board.add_piece(rook1)
+    game_with_validation.board.add_piece(rook2)
+
+    assert not game_with_validation.has_legal_moves(Colour.WHITE)
 
 def test_game_make_move(make_dummy_piece: Callable[["Position", "Colour"], "DummyPiece"]):
     origin, destination = Position(0,0), Position(1, 5)

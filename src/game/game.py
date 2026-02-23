@@ -7,10 +7,13 @@ from src.moves.capture_move import CaptureMove
 from src.moves.move_history import MoveHistory
 from src.validator.validator import Validator
 
+from src.game.state.playing_state import PlayingState
+
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from src.core.position import Position
+    from src.game.state.game_state import GameState
 
 
 class Game:
@@ -19,8 +22,12 @@ class Game:
         self._player_turn = Colour.WHITE
         self._move_history = MoveHistory()
         self._validator = validator
+        self._state: 'GameState' = PlayingState()
 
     def make_move(self, origin: 'Position', destination: 'Position') -> bool:
+        return self._state.handle_move(self, origin, destination)
+    
+    def execute_move(self, origin: 'Position', destination: 'Position') -> 'bool':
         piece = self._board.get_piece_at(origin)
         if piece is None:
             return False
@@ -56,6 +63,27 @@ class Game:
         self._move_history.redo(self._board)
         self._change_player_turn()
 
+    def set_state(self, state: 'GameState') -> 'None':
+        self._state = state
+    
+    def get_status(self) -> 'str':
+        return self._state.get_status()
+    
+    def is_game_over(self) -> 'bool':
+        return self._state.is_game_over()
+
+    def is_in_check(self, colour: 'Colour') -> 'bool':
+        king = self._board.find_king(colour)
+        return self._board.is_square_attacked(king.position, colour.opposite())
+
+    def has_legal_moves(self, colour: 'Colour') -> 'bool':
+        for piece in self._board.get_pieces(colour):
+            for dest in piece.get_legal_moves(self._board):
+                move = self._create_move(piece, piece.position, dest)
+                if self._validator is None or self._validator.validate(move, self._board):
+                    return True
+        return False
+
     @property
     def board(self) -> 'Board':
         return self._board
@@ -68,3 +96,6 @@ class Game:
     def move_history(self) -> 'MoveHistory':
         return self._move_history
     
+    @property
+    def state(self) -> 'GameState':
+        return self._state
