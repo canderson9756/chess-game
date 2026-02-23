@@ -148,3 +148,12 @@ class Board:
             self._pieces.remove(piece)
         else:
             raise TypeError(f"No piece at the given location: {remove_position}")
+
+    def is_square_attacked(self, position: 'Position', colour: 'Colour') -> 'bool':
+        for piece in self.get_pieces():
+            if piece.colour != colour:
+                continue
+            attacks = piece.get_attack_moves(self)
+            if position in attacks:
+                return True
+        return False

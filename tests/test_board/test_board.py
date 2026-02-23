@@ -109,3 +109,10 @@ def test_board_remove_piece(
     board.remove_piece(Position(0, 4))
 
     assert board.get_piece_at(Position(0, 4)) == None
+
+def test_board_is_quare_attacked(make_dummy_piece: Callable[["Position", "Colour"], "DummyPiece"]):
+    board = Board()
+    piece = make_dummy_piece(Position(0, 4), Colour.WHITE)
+    board.add_piece(piece)
+
+    assert board.is_square_attacked(Position(4, 4), piece.colour) == True

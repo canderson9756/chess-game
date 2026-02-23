@@ -15,6 +15,7 @@ class Validator(ABC):
             return False
         if self._next:
             return self._next.validate(move, board) #type: ignore
+        return True
             
     @abstractmethod
     def _do_validate(self, move: 'Move', board: 'Board') -> 'bool':

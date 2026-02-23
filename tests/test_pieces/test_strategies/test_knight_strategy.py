@@ -23,6 +23,24 @@ def test_knight_moves_in_l_shape():
     ]
     assert set(moves) == set(expected)
 
+def test_knight_attacks_in_l_shape():
+    strategy = KnightStrategy()
+    knight = Knight(Position(3, 3), Colour.WHITE)
+
+    attacks = strategy.get_attack_moves(knight, board=Board())
+
+    expected = [
+        Position(1, 2),
+        Position(1, 4),
+        Position(5, 2),
+        Position(5, 4),
+        Position(2, 1),
+        Position(4, 1),
+        Position(2, 5),
+        Position(4, 5),
+    ]
+    assert set(attacks) == set(expected)
+
 
 def test_knight_cannot_capture_friendly():
     board = Board()

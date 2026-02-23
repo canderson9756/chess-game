@@ -13,6 +13,13 @@ def test_rook_moves_orthogonally():
 
     assert len(moves) == 14
 
+def test_rook_attacks_orthogonally():
+    strategy = RookStrategy()
+    rook = Rook(Position(3, 3), Colour.WHITE)
+
+    attacks = strategy.get_attack_moves(rook, board=Board())
+
+    assert len(attacks) == 14
 
 def test_rook_blocked_by_friendly():
     board = Board()

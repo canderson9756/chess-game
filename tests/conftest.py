@@ -10,13 +10,14 @@ _ALL_POSITIONS = [Position(file, rank) for rank in range(8) for file in range(8)
 class DummyPiece(Piece):
     def get_legal_moves(self, board: "Board") -> list["Position"]:
         return _ALL_POSITIONS
+    def get_attack_moves(self, board: Board) -> list[Position]:
+        return _ALL_POSITIONS
 
 
 @pytest.fixture()
 def make_dummy_piece() -> Callable[["Position", "Colour"], "DummyPiece"]:
     def _make(position: "Position", colour: "Colour") -> "DummyPiece":
         return DummyPiece(position, colour)
-
     return _make
 
 
