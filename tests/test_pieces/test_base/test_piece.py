@@ -45,6 +45,13 @@ def test_piece_has_abstract_legal_moves():
     with pytest.raises(TypeError):
         DummyPieceNoLegalMoves(Position(0, 0), Colour.WHITE)  # type: ignore[abstract]
 
+def test_piece_has_abstract_attack_moves():
+    class DummyPieceNoAttackMoves(Piece):
+        pass
+
+    with pytest.raises(TypeError):
+        DummyPieceNoAttackMoves(Position(0,0), Colour.WHITE)    # type: ignore[abstract]
+
 
 def test_piece_set_position(
     make_dummy_piece: Callable[["Position", "Colour"], "DummyPiece"]

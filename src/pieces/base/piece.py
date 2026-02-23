@@ -62,6 +62,17 @@ class Piece(ABC):
             A list of valid destination positions.
         """
 
+    @abstractmethod
+    def get_attack_moves(self, board: "Board") -> list["Position"]:
+        """Calculate all squares that this piece can 'see'.
+
+        Args:
+            board: The current board state for collision detection.
+
+        Returns:
+            A list of valid destination positions.
+        """
+
     def move_to(self, position: "Position") -> None:
         """Move the piece to a new position.
 
