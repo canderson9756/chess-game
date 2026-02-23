@@ -45,3 +45,19 @@ def test_bishop_blocked_by_enemy():
     assert Position(6, 6) not in moves
     assert Position(7, 7) not in moves
     assert Position(2, 2) in moves
+
+def test_bishop_blocked_by_friendly_still_in_attack():
+    strategy = BishopStrategy()
+    bishop = Bishop(Position(3, 3), Colour.WHITE)
+    friendly = Bishop(Position(5, 5), Colour.WHITE)
+
+    board = Board()
+    board.add_piece(bishop)
+    board.add_piece(friendly)
+
+    attacks = strategy.get_attack_moves(bishop, board)
+
+    assert Position(5, 5) in attacks
+    assert Position(6, 6) not in attacks
+    assert Position(7, 7) not in attacks
+    assert Position(2, 2) in attacks

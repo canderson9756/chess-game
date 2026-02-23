@@ -36,6 +36,18 @@ def test_knight_cannot_capture_friendly():
 
     assert Position(5, 4) not in moves  # Blocked
 
+def test_knight_friendly_in_attack_moves():
+    board = Board()
+    knight = Knight(Position(3, 3), Colour.WHITE)
+    friendly = Knight(Position(5, 4), Colour.WHITE)  # Blocking square
+    board.add_piece(knight)
+    board.add_piece(friendly)
+
+    strategy = KnightStrategy()
+    attacks = strategy.get_attack_moves(knight, board)
+
+    assert Position(5, 4) in attacks  # Blocked
+
 
 def test_knight_can_capture_enemy():
     board = Board()

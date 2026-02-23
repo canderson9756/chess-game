@@ -28,3 +28,18 @@ def test_rook_blocked_by_friendly():
     assert Position(0, 3) not in moves
     assert Position(0, 4) not in moves
     assert Position(0, 2) in moves  # Can still reach squares before blocker
+
+def test_rook_friendly_in_attack():
+    board = Board()
+    rook = Rook(Position(0, 0), Colour.WHITE)
+    blocker = Rook(Position(0, 3), Colour.WHITE)
+    board.add_piece(rook)
+    board.add_piece(blocker)
+
+    strategy = RookStrategy()
+    attacks = strategy.get_attack_moves(rook, board)
+
+    # Can't move to (0,3) or beyond
+    assert Position(0, 3) in attacks
+    assert Position(0, 4) not in attacks
+    assert Position(0, 2) in attacks  # Can still reach squares before blocker

@@ -13,7 +13,6 @@ class BishopStrategy(SlidingStrategy):
     Bishops move diagonally any number of squares in the four
     diagonal directions.
     """
-
     @property
     def directions(self) -> list[Direction]:
         """Get the four diagonal directions."""

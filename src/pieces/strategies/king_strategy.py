@@ -48,3 +48,12 @@ class KingStrategy(MoveStrategy):
                     continue
                 moves.append(target)
         return moves
+    
+    def get_attack_moves(self, piece: Piece, board: Board) -> list[Position]:
+        moves: list['Position'] = []
+        for move in KING_MOVES:
+            target = piece.position + move
+            if target.is_valid():
+                moves.append(target)
+        return moves
+    

@@ -29,3 +29,7 @@ class MoveStrategy(ABC):
         Returns:
             A list of valid destination positions.
         """
+
+    @abstractmethod
+    def get_attack_moves(self, piece: 'Piece', board: 'Board') -> list['Position']:
+        pass

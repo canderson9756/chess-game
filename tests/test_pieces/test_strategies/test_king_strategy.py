@@ -109,3 +109,21 @@ def test_king_can_capture_enemy(
     assert set(moves) == set(expected)
     assert len(moves) == 5
     assert Position(1, 3) in moves
+
+def test_king_friendly_in_attack_moves(
+    make_dummy_piece: Callable[["Position", "Colour"], "DummyPiece"]
+):
+    king = King(Position(0, 3), Colour.WHITE)
+    strategy = KingStrategy()
+    friendly = make_dummy_piece(Position(1, 3), Colour.WHITE)
+    board = Board()
+    board.add_piece(king)
+    board.add_piece(friendly)
+
+    attacks = strategy.get_attack_moves(king, board)
+
+    expected = [Position(0, 4), Position(1, 4), Position(1, 2), Position(0, 2), Position(1, 3)]
+
+    assert Position(1, 3) in attacks
+    assert set(attacks) == set(expected)
+    assert len(attacks) == 5

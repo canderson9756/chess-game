@@ -47,9 +47,15 @@ class SlidingStrategy(MoveStrategy):
         for direction in self.directions:
             moves.extend(self._get_moves_in_direction(piece, board, direction))
         return moves
+    
+    def get_attack_moves(self, piece: Piece, board: Board) -> list[Position]:
+        moves: list["Position"] = []
+        for direction in self.directions:
+            moves.extend(self._get_moves_in_direction(piece, board, direction, attack_flag=True))
+        return moves
 
     def _get_moves_in_direction(
-        self, piece: "Piece", board: "Board | None", direction: "Direction"
+        self, piece: "Piece", board: "Board | None", direction: "Direction", attack_flag: "bool" = False
     ) -> list["Position"]:
         """Get all moves in a single direction.
 
@@ -69,7 +75,10 @@ class SlidingStrategy(MoveStrategy):
         while current.is_valid():
             if board is None:
                 moves.append(current)
-            elif board.has_friendly_piece(current, piece.colour):
+            elif board.has_friendly_piece(current, piece.colour) and attack_flag==False:
+                break
+            elif board.has_friendly_piece(current, piece.colour) and attack_flag:
+                moves.append(current)
                 break
             elif board.has_enemy_piece(current, piece.colour):
                 moves.append(current)

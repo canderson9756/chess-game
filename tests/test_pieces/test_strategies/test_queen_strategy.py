@@ -13,7 +13,6 @@ def test_queen_moves_orthogonally_and_diagonally():
 
     assert len(moves) == 27
 
-
 def test_queen_blocked_by_friendly():
     strategy = QueenStrategy()
     queen = Queen(Position(3, 3), Colour.WHITE)
@@ -30,6 +29,21 @@ def test_queen_blocked_by_friendly():
     assert Position(7, 7) not in moves
     assert Position(2, 2) in moves
 
+def test_queen_friendly_in_attack():
+    strategy = QueenStrategy()
+    queen = Queen(Position(3, 3), Colour.WHITE)
+    friendly = Queen(Position(5, 5), Colour.WHITE)
+
+    board = Board()
+    board.add_piece(queen)
+    board.add_piece(friendly)
+
+    attacks = strategy.get_attack_moves(queen, board)
+
+    assert Position(5, 5) in attacks
+    assert Position(6, 6) not in attacks
+    assert Position(7, 7) not in attacks
+    assert Position(2, 2) in attacks
 
 def test_queen_blocked_by_enemy():
     strategy = QueenStrategy()

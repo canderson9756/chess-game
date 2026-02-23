@@ -38,3 +38,6 @@ class Bishop(Piece):
             List of valid positions the bishop can move to.
         """
         return self._strategy.get_legal_moves(self, board)
+    
+    def get_attack_moves(self, board: Board) -> list[Position]:
+        return self._strategy.get_attack_moves(self, board)

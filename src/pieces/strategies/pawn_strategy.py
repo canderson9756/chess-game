@@ -55,3 +55,13 @@ class PawnStrategy(MoveStrategy):
                 moves.append(diagonal)
 
         return moves
+    
+    def get_attack_moves(self, piece: Piece, board: Board) -> list[Position]:
+        moves: list[Position] = []
+        direction = piece.colour.direction()
+        dx = [-1, 1]
+        for capture_direction in dx:
+            diagonal = piece.position + Direction(capture_direction, direction)
+            if diagonal.is_valid():
+                moves.append(diagonal)
+        return moves

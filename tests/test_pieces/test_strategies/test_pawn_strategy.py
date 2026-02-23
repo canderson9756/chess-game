@@ -131,3 +131,28 @@ def test_no_diagonal_capture_friendly():
     moves = strategy.get_legal_moves(pawn, board)
     assert Position(5, 2) not in moves
     assert Position(3, 2) not in moves
+
+def test_diagonal_in_attack_if_empty():
+    board = Board()
+    pawn = Pawn(Position(4, 1), Colour.WHITE)
+    board.add_piece(pawn)
+
+    strategy = PawnStrategy()
+    attacks = strategy.get_attack_moves(pawn, board)
+    assert Position(5, 2) in attacks
+    assert Position(3, 2) in attacks
+
+
+def test_diagonal_in_attack_with_friendly():
+    board = Board()
+    pawn = Pawn(Position(4, 1), Colour.WHITE)
+    capturable_spaces = [Position(5, 2), Position(3, 2)]
+    capturable_pawns = [Pawn(position, Colour.WHITE) for position in capturable_spaces]
+    board.add_piece(pawn)
+    for piece in capturable_pawns:
+        board.add_piece(piece)
+
+    strategy = PawnStrategy()
+    attacks = strategy.get_attack_moves(pawn, board)
+    assert Position(5, 2) in attacks
+    assert Position(3, 2) in attacks
