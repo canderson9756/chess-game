@@ -1,3 +1,9 @@
+"""Board builder for fluent board construction.
+
+This module provides the BoardBuilder class implementing the Builder pattern
+for creating chess boards with various configurations.
+"""
+
 from .board import Board
 from src.core.colour import Colour
 from src.core.position import Position
@@ -9,19 +15,52 @@ from src.pieces.concrete.pawn import Pawn
 from src.pieces.concrete.queen import Queen
 from src.pieces.concrete.rook import Rook
 
+
 class BoardBuilder:
+    """Fluent builder for constructing chess boards.
+
+    BoardBuilder provides a fluent interface for creating boards with
+    custom piece configurations or standard starting positions.
+
+    Example:
+        >>> board = BoardBuilder().with_standard_position().build()
+        >>> custom = BoardBuilder().with_piece(king).with_piece(rook).build()
+    """
 
     def __init__(self):
+        """Initialize a new builder with an empty board."""
         self._board = Board()
 
     def build(self) -> 'Board':
+        """Build and return the configured board.
+
+        Returns:
+            The constructed Board instance.
+        """
         return self._board
-    
+
     def with_piece(self, piece: 'Piece') -> 'BoardBuilder':
+        """Add a single piece to the board.
+
+        Args:
+            piece: The piece to add.
+
+        Returns:
+            Self for method chaining.
+        """
         self._board.add_piece(piece)
         return self
-    
+
     def with_standard_position(self) -> 'BoardBuilder':
+        """Set up the standard chess starting position.
+
+        Places all 32 pieces in their standard starting squares:
+        - White pieces on ranks 1-2
+        - Black pieces on ranks 7-8
+
+        Returns:
+            Self for method chaining.
+        """
         self._board.add_piece(Rook(Position(0, 0), Colour.WHITE))
         self._board.add_piece(Knight(Position(1, 0), Colour.WHITE))
         self._board.add_piece(Bishop(Position(2, 0), Colour.WHITE))

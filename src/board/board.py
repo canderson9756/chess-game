@@ -150,6 +150,15 @@ class Board:
             raise TypeError(f"No piece at the given location: {remove_position}")
 
     def is_square_attacked(self, position: 'Position', colour: 'Colour') -> 'bool':
+        """Check if a square is attacked by any piece of the given colour.
+
+        Args:
+            position: The position to check.
+            colour: The attacking colour to check for.
+
+        Returns:
+            True if any piece of the specified colour attacks this square.
+        """
         for piece in self.get_pieces():
             if piece.colour != colour:
                 continue
@@ -159,6 +168,17 @@ class Board:
         return False
 
     def find_king(self, colour: 'Colour') -> 'Piece':
+        """Find the king of the specified colour.
+
+        Args:
+            colour: The colour of the king to find.
+
+        Returns:
+            The King piece of the specified colour.
+
+        Raises:
+            ValueError: If no king of that colour is found on the board.
+        """
         for piece in self._pieces:
             if piece.is_king and piece.colour == colour:
                 return piece
