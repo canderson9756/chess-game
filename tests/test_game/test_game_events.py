@@ -1,5 +1,7 @@
-from src.core import Colour
-from src.events import EventBus, MoveEvent, CaptureEvent, TurnEvent, GameOverEvent
+from src.core import Colour, Position
+from src.pieces import Knight, Pawn, Rook
+from src.events import EventBus, MoveEvent, CaptureEvent, CheckEvent, EventListener, GameEvent, TurnEvent
+from src.game import Game
 
 import pytest
 
@@ -12,7 +14,7 @@ class MockListener(EventListener):
         self.received_event = event
         self.call_count += 1
 
-def test_game_publishes_move_event(game_with_validation):
+def test_game_publishes_move_event(game_with_validation: 'Game'):
     listener = MockListener()
     EventBus().clear()
     EventBus().subscribe(MoveEvent, listener)
@@ -24,7 +26,7 @@ def test_game_publishes_move_event(game_with_validation):
     assert isinstance(listener.received_event, MoveEvent)
     assert listener.received_event.piece == knight
 
-def test_game_publishes_capture_event(game_with_validation):
+def test_game_publishes_capture_event(game_with_validation: 'Game'):
     listener = MockListener()
     EventBus().clear()
     EventBus().subscribe(CaptureEvent, listener)
@@ -37,17 +39,23 @@ def test_game_publishes_capture_event(game_with_validation):
 
     assert isinstance(listener.received_event, CaptureEvent)
 
-def test_game_publishes_turn_event(game_with_validation):
+def test_game_publishes_turn_event(game_with_validation: 'Game'):
     listener = MockListener()
     EventBus().clear()
     EventBus().subscribe(TurnEvent, listener)
 
-    # Make a move...
+    rook = Rook(Position(0, 0), Colour.WHITE)
+    enemy = Pawn(Position(0, 6), Colour.BLACK)
+    game_with_validation.board.add_piece(rook)
+    game_with_validation.board.add_piece(enemy)
+    game_with_validation.make_move(Position(0, 0), Position(0, 6))
     assert listener.received_event.colour == Colour.BLACK  # After white moves
 
-def test_game_publishes_check_event(game_with_validation):
+def test_game_publishes_check_event(game_with_validation: 'Game'):
     # Setup position where move gives check
     listener = MockListener()
     EventBus().subscribe(CheckEvent, listener)
-    # Make move that gives check...
+    rook = Rook(Position(0, 0), Colour.WHITE)
+    game_with_validation.board.add_piece(rook)
+    game_with_validation.make_move(Position(0, 0), Position(0, 7))
     assert listener.received_event.colour_in_check == Colour.BLACK
