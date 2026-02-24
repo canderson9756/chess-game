@@ -3,4 +3,4 @@ import time
 
 @dataclass
 class GameEvent:
-    timestamp: float = field(default_factory=time.time)
+    timestamp: float = field(default_factory=time.time, kw_only=True)
