@@ -3,6 +3,7 @@ from src.pieces import Piece, King
 from src.board import Board
 from src.game import Game
 from src.validator import CheckValidator
+from src.events import EventListener, GameEvent
 import pytest
 from typing import Callable
 
@@ -56,3 +57,17 @@ def board_with_kings():
     board.add_piece(King(Position(4, 0), Colour.WHITE))
     board.add_piece(King(Position(4, 7), Colour.BLACK))
     return board
+
+class MockListener(EventListener):
+    def __init__(self):
+        self.received_event: 'GameEvent | None' = None
+        self.call_count: 'int' = 0
+
+    def on_event(self, event: GameEvent) -> None:
+        self.received_event = event
+        self.call_count += 1
+
+@pytest.fixture
+def mock_listener() -> 'EventListener':
+    return MockListener()
+
