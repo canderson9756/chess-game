@@ -4,5 +4,6 @@ from .event_bus import EventBus
 from .move_event import MoveEvent
 from .capture_event import CaptureEvent
 from .game_over_event import GameOverEvent
+from .turn_event import TurnEvent
 
-__all__ = ['GameEvent', 'EventListener', 'EventBus', 'MoveEvent', 'CaptureEvent', 'GameOverEvent']
+__all__ = ['GameEvent', 'EventListener', 'EventBus', 'MoveEvent', 'CaptureEvent', 'GameOverEvent', 'TurnEvent']
