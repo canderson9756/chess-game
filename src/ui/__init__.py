@@ -8,5 +8,7 @@ Classes:
 """
 
 from .adapter import GameAdapter
+from .cli_adapter import CLIAdapter
+from .game_controller import GameController
 
-__all__ = ['GameAdapter']
+__all__ = ['GameAdapter', 'CLIAdapter', 'GameController']
