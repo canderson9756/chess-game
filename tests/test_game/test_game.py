@@ -1,8 +1,8 @@
 from src import Game
-from src.board import Board
+from src.board import Board,BoardBuilder
 from src.core import Colour, Position
 from src.moves import MoveHistory
-from src.pieces import Queen, Rook, Knight    # Using the queen as a test piece as it has the most flexibility
+from src.pieces import Queen, Rook, Knight, King
 from src.game.state import PlayingState
 
 from typing import TYPE_CHECKING, Callable
@@ -148,3 +148,12 @@ def test_game_rejects_move_that_leaves_king_in_check(game_with_validation: 'Game
 
     assert result == False
     assert blocker.position == Position(4, 1)  # Didn't move
+
+def test_game_accepts_board_parameter():
+    board = BoardBuilder().with_piece(King(Position(4, 0), Colour.WHITE)).build()
+    game = Game(board=board)
+    assert game.board.get_piece_at(Position(4, 0)) is not None
+
+def test_game_defaults_to_empty_board():
+    game = Game()
+    assert len(game.board.get_pieces()) == 0

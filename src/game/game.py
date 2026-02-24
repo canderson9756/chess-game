@@ -18,8 +18,8 @@ if TYPE_CHECKING:
 
 
 class Game:
-    def __init__(self, validator: 'Validator | None' = None):
-        self._board = Board()
+    def __init__(self, board: 'Board | None' = None, validator: 'Validator | None' = None):
+        self._board = board if board else Board()
         self._player_turn = Colour.WHITE
         self._move_history = MoveHistory()
         self._validator = validator
