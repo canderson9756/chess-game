@@ -6,6 +6,7 @@ from src.moves.standard_move import StandardMove
 from src.moves.capture_move import CaptureMove
 from src.moves.move_history import MoveHistory
 from src.validator.validator import Validator
+from src.events import EventBus, MoveEvent, CaptureEvent, CheckEvent, GameEvent, TurnEvent
 
 from src.game.state.playing_state import PlayingState
 
@@ -23,6 +24,7 @@ class Game:
         self._move_history = MoveHistory()
         self._validator = validator
         self._state: 'GameState' = PlayingState()
+        self._event_bus: 'EventBus' = EventBus()
 
     def make_move(self, origin: 'Position', destination: 'Position') -> bool:
         return self._state.handle_move(self, origin, destination)
@@ -43,8 +45,16 @@ class Game:
             return False
 
         move.execute(self._board)
+        self._event_bus.publish(MoveEvent(piece, origin, destination))
+        if isinstance(move, CaptureMove):
+            self._event_bus.publish(CaptureEvent(move._captured_piece, piece)) #type: ignore
+            
         self._move_history.push(move)
         self._change_player_turn()
+
+        if self.is_in_check(self._player_turn):
+            self._event_bus.publish(CheckEvent(self._player_turn))
+
         return True
     
     def _create_move(self, piece: 'Piece', origin: 'Position', destination: 'Position') -> 'Move':
@@ -54,6 +64,7 @@ class Game:
     
     def _change_player_turn(self) -> None:
         self._player_turn = self._player_turn.opposite()
+        self._event_bus.publish(TurnEvent(self._player_turn))
 
     def undo(self) -> None:
         self._move_history.undo(self._board)
